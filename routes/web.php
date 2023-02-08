@@ -10,7 +10,13 @@ use App\Http\Controllers\Front\HomeController;
 use App\Http\Livewire\Admin\Dashboard;
 
 // Front Routes
-Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Delete User
+Route::middleware('revalidate')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/users/{id}/delete', [HomeController::class, 'deletePage'])->name('users.delete-page');
+    Route::delete('/users/{id}', [HomeController::class, 'delete'])->name('users.delete');
+});
 
 // Admin Routes
 Route::middleware([
@@ -18,6 +24,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
+
     Route::middleware(['is_admin'])->group(function () {
         Route::prefix('admin')->group(function () {
             Route::name('admin.')->group(function () {
