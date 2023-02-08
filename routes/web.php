@@ -7,9 +7,18 @@ use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\ProductController;
 use App\Http\Livewire\Admin\Dashboard;
 
 // Front Routes
+
+// about page
+Route::get('/about', function () {
+    return 'A bout';
+})->name('about');
+
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+
 
 // Delete User
 Route::middleware('revalidate')->group(function () {
