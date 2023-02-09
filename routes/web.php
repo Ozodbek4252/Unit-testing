@@ -11,13 +11,12 @@ use App\Http\Controllers\ProductController;
 use App\Http\Livewire\Admin\Dashboard;
 
 // Front Routes
-
-// about page
-Route::get('/about', function () {
-    return 'A bout';
-})->name('about');
-
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/create', [ProductController::class, 'create'])->middleware('is_admin')->name('products.create');
+Route::post('/products', [ProductController::class, 'store'])->middleware('is_admin')->name('products.store');
+Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->middleware('is_admin')->name('products.edit');
+Route::put('/products/{id}', [ProductController::class, 'update'])->middleware('is_admin')->name('products.update');
+Route::delete('/products/{id}', [ProductController::class, 'destroy'])->middleware('is_admin')->name('products.destroy');
 
 
 // Delete User
